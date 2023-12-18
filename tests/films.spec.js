@@ -292,7 +292,29 @@ describe('Function "orderByYear"', () => {
 
 // Exercise 6
 // YOUR CODE HERE. Test moviesAverageByCategory()
+describe('moviesAverageByCategory', () => {
+  it('should be declared', () => {
+    expect(moviesAverageByCategory).toBeDefined();
+  });
 
+  it('should return a number', () => {
+    const averageScore = moviesAverageByCategory(movies, 'Action');
+    expect(typeof averageScore).toBe('number');
+  });
+
+  it('should be different from NaN', () => {
+    const averageScore = moviesAverageByCategory(movies, 'Action');
+    expect(isNaN(averageScore)).toBe(false);
+  });
+
+  it('should return the average score of movies selecting only the genre films. With 2 decimals!', () => {
+    const averageScore = moviesAverageByCategory(movies, 'Drama');
+    expect(averageScore).toBeCloseTo(8.32, 2); // Adjust the expected value based on your data
+  });
+
+  // Add more test cases as needed
+});
+  
 
 // Exercise 7
 describe('Function "hoursToMinutes"', () => {
