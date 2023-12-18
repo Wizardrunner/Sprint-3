@@ -3,8 +3,25 @@
 
 <body>
 
-    <h1>Sprint 4 IT ACADEMY</h1>
-    
+    <h1>Sprint 3 IT ACADEMY</h1>
+
+    <button onclick="showDirectors()">Show Directors</button>
+    <div id="directorsContainer"></div>
+
+<!-- Input for director -->
+<label for="directorInput">Enter Director's Name: </label>
+<input type="text" id="directorInput">
+<br>
+
+<!-- Button to trigger the display of movies for a specific director -->
+<button onclick="showMoviesForDirector()">Show Movies for Director</button>
+
+<!-- Container to display movies for the specific director -->
+<div id="moviesForDirectorContainer"></div>
+
+    <script src="films.js"></script>
+    <script src="data.js"></script>
+
 </body>
 
 </html>
