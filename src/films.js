@@ -99,8 +99,9 @@ const top20MoviesContainer = document.getElementById('top20MoviesContainer');
 
 top20MoviesContainer.innerHTML = "<h2>Top 20 Movies Alphabetically:</h2>";
 
-top20Movies.forEach(movie => {
-  top20MoviesContainer.innerHTML += `<p>${movie.title}</p>`;
+top20Movies.forEach(movieTitle => {
+  // Use movieTitle instead of movie, as it's an array of titles
+  top20MoviesContainer.innerHTML += `<p>${movieTitle}</p>`;
 });
 }
 
@@ -137,49 +138,111 @@ moviesByYear.forEach(movie => {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(moviesArray, genre) {
-  const genreMovies = moviesArray.filter(movie => movie.genre.includes(genre));
+const genreMovies = moviesArray.filter(movie => movie.genre.includes(genre));
 
-  if (genreMovies.length === 0) {
-    return 0; // Return 0 if no movies found for the genre
-  }
-
-  const totalScore = genreMovies.reduce((acc, movie) => acc + movie.score, 0);
-  const averageScore = totalScore / genreMovies.length;
-
-  // Return the average score with two decimal places
-  return Number(averageScore.toFixed(2));
+if (genreMovies.length === 0) {
+  return 0; // Return 0 if no movies found for the genre
 }
 
-  // Function to show the average score by genre on the screen
-  function showAverageScoreByGenre() {
-    // Get the genre input from the user
-    const genreInput = document.getElementById('genreInput').value;
+const totalScore = genreMovies.reduce((acc, movie) => acc + movie.score, 0);
+const averageScore = totalScore / genreMovies.length;
 
-    // Calculate the average score for the specified genre
-    const averageScore = moviesAverageByCategory(movies, genreInput);
+// Return the average score with two decimal places
+return Number(averageScore.toFixed(2));
+}
 
-    // Display the average score by genre in the container
-    const averageScoreByGenreContainer = document.getElementById('averageScoreByGenreContainer');
-    
-    averageScoreByGenreContainer.innerHTML = "<h2>Average Score By Genre:</h2>";
+// Function to show the average score by genre on the screen
+function showAverageScoreByGenre() {
+  // Get the genre input from the user
+  const genreInput = document.getElementById('genreInput').value;
 
-    if (averageScore !== 0) {
-      averageScoreByGenreContainer.innerHTML += `<p><strong>${genreInput}</strong>: ${averageScore}</p>`;
-    } else {
-      averageScoreByGenreContainer.innerHTML += `<p>No movies found for <strong>${genreInput}</strong></p>`;
-    }
+  // Calculate the average score for the specified genre
+  const averageScore = moviesAverageByCategory(movies, genreInput);
+
+  // Display the average score by genre in the container
+  const averageScoreByGenreContainer = document.getElementById('averageScoreByGenreContainer');
+  
+  averageScoreByGenreContainer.innerHTML = "<h2>Average Score By Genre:</h2>";
+
+  if (averageScore !== 0) {
+    averageScoreByGenreContainer.innerHTML += `<p><strong>${genreInput}</strong>: ${averageScore}</p>`;
+  } else {
+    averageScoreByGenreContainer.innerHTML += `<p>No movies found for <strong>${genreInput}</strong></p>`;
   }
+}
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
+function hoursToMinutes(moviesArray) {
+return moviesArray.map(movie => {
+  const durationParts = movie.duration.split('h ');
 
+  let totalMinutes = 0;
+
+  if (durationParts.length === 2) {
+    // Both hours and minutes are present
+    const [hours, minutes] = durationParts;
+    totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
+  } else if (durationParts.length === 1 && durationParts[0].includes('min')) {
+    // Only minutes are present
+    totalMinutes = parseInt(durationParts[0]);
+  } else if (durationParts.length === 1 && durationParts[0].includes('h')) {
+    // Only hours are present
+    totalMinutes = parseInt(durationParts[0]) * 60;
+  }
+
+  return {
+    ...movie,
+    duration: totalMinutes, // Convert to number
+  };
+});
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-  
+function bestFilmOfYear(moviesArray, year) {
+  // Filter movies for the specified year
+  const moviesOfYear = moviesArray.filter(movie => movie.year === year);
+
+  // Check if there are movies for the specified year
+  if (moviesOfYear.length === 0) {
+    return []; // Return an empty array if no movies found for the specified year
+  }
+
+  // Find the movie with the highest score
+  const bestMovie = moviesOfYear.reduce((prevMovie, currentMovie) => {
+    return prevMovie.score > currentMovie.score ? prevMovie : currentMovie;
+  });
+
+  return [bestMovie]; // Return an array with the best movie
 }
 
+function findBestFilmOfYear() {
+  // Get the year input from the user
+  const yearInput = document.getElementById('yearInput').value;
+
+  // Call the bestFilmOfYear function
+  const bestMovies = bestFilmOfYear(movies, parseInt(yearInput));
+
+  // Display the result in the container
+  const bestFilmContainer = document.getElementById('bestFilmContainer');
+  
+  bestFilmContainer.innerHTML = "<h2>Best Film of the Year:</h2>";
+
+  if (bestMovies.length > 0) {
+    // Display information about the best movie
+    const bestMovie = bestMovies[0];
+    bestFilmContainer.innerHTML += `
+      <p>Title: ${bestMovie.title}</p>
+      <p>Year: ${bestMovie.year}</p>
+      <p>Director: ${bestMovie.director}</p>
+      <p>Duration: ${bestMovie.duration} minutes</p>
+      <p>Genre: ${bestMovie.genre.join(', ')}</p>
+      <p>Score: ${bestMovie.score}</p>
+    `;
+  } else {
+    // Handle the case where no movies are found for the specified year
+    bestFilmContainer.innerHTML += `<p>No movies found for the specified year.</p>`;
+  }
+}
 
 
 // The following is required to make unit tests work.

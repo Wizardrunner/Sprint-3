@@ -8,45 +8,54 @@
     <button onclick="showDirectors()">Show Directors</button>
     <div id="directorsContainer"></div>
 
-<!-- Input for director -->
+<!-- Entrada para el nombre del director -->
 <label for="directorInput">Enter Director's Name: </label>
 <input type="text" id="directorInput">
 <br>
 
-<!-- Button to trigger the display of movies for a specific director -->
+<!-- Botón para activar la visualización de películas de un director específico -->
 <button onclick="showMoviesForDirector()">Show Movies for Director</button>
 
-<!-- Container to display movies for the specific director -->
+<!-- Contenedor para mostrar películas del director específico -->
 <div id="moviesForDirectorContainer"></div>
 
-<!-- Button to trigger the calculation of average scores for a specific director -->
+<!-- Botón para activar el cálculo de la puntuación media de un director específico -->
 <button onclick="showAverageScoreForDirector()">Show Average Score for Director</button>
 
-<!-- Container to display the average score for the specific director -->
+<!-- Contenedor para mostrar la puntuación media del director específico -->
 <div id="averageScoreContainer"></div>
 
-<!-- Button to trigger the display of top 20 movies alphabetically -->
+<!-- Botón para activar la visualización de las 20 primeras películas alfabéticamente -->
 <button onclick="showTop20MoviesAlphabetically()">Show Top 20 Movies Alphabetically</button>
 
-<!-- Container to display top 20 movies alphabetically -->
+<!-- Contenedor para mostrar las 20 primeras películas alfabéticamente -->
 <div id="top20MoviesContainer"></div>
 
-<!-- Button to trigger the display of movies ordered by year -->
+<!-- Botón para activar la visualización de películas ordenadas por año -->
 <button onclick="showMoviesOrderedByYear()">Show Movies Ordered By Year</button>
 
-<!-- Container to display movies ordered by year -->
+<!-- Contenedor para mostrar las películas ordenadas por año -->
 <div id="moviesByYearContainer"></div>
 
-<!-- Input for genre -->
+<!-- Entrada para el género de la película -->
 <label for="genreInput">Enter Genre: </label>
 <input type="text" id="genreInput">
 <br>
 
-<!-- Button to trigger the display of average score by genre -->
+<!-- Botón para activar la visualización de la puntuación media por género -->
 <button onclick="showAverageScoreByGenre()">Show Average Score By Genre</button>
 
-<!-- Container to display average score by genre -->
+<!-- Contenedor para mostrar la puntuación media por género -->
 <div id="averageScoreByGenreContainer"></div>
+
+<!-- Entrada para el año de la película -->
+<label for="yearInput">Enter Year: </label>
+<input type="number" id="yearInput" min="1921" max="2023">
+<button onclick="findBestFilmOfYear()">Find Best Film</button>
+
+<!-- Contenedor para mostrar la mejor película del año -->
+<div id="bestFilmContainer"></div>
+
 
     <script src="films.js"></script>
     <script src="data.js"></script>

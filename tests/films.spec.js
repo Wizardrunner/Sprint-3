@@ -292,7 +292,7 @@ describe('Function "orderByYear"', () => {
 
 // Exercise 6
 // YOUR CODE HERE. Test moviesAverageByCategory()
-describe('moviesAverageByCategory', () => {
+describe('Function "moviesAverageByCategory"', () => {
   it('should be declared', () => {
     expect(moviesAverageByCategory).toBeDefined();
   });
